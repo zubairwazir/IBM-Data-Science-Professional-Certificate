@@ -1,0 +1,7 @@
+pandas
+flask
+numpy
+dash
+requests
+folium
+sciket-learn

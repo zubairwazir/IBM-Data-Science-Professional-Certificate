@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<!-- saved from url=(0178)https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DS0101EN-SkillsNetwork/labs/Module%202/Watson_Gallery.md.html?origin=www.coursera.org -->
+<html lang="en" foxified=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./Watson_Gallery.md_files/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./Watson_Gallery.md_files/default.min.css">
+  <style type="text/css">/* this file is used for labs on cognitiveclass.ai that were written in markdown */
+
+/* applies to images, i.e. "![]()" in markdown */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* add padding and margins */
+body {
+  padding: 10px;
+  margin: 10px;
+}
+
+/* applies to tables, i.e. "|--|--|" in markdown */
+table td,
+table th {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+/* applies to using quotes, i.e. ">" in markdown */
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 1em 10px 0.1em 10px;
+  quotes: '\201C''\201D''\2018''\2019';
+}
+
+/* the headers need some spacing */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  padding-top: 20px;
+}
+
+/* Add padding between nested list item */
+ul > li > ul {
+  padding-bottom: 1rem;
+}
+
+.code-badge-language {
+  display: none;
+}
+.code-badge-copy-icon {
+  background: url('data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhciIgZGF0YS1pY29uPSJjb3B5IiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtY29weSBmYS13LTE0IiByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQ0OCA1MTIiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTQzMy45NDEgNjUuOTQxbC01MS44ODItNTEuODgyQTQ4IDQ4IDAgMCAwIDM0OC4xMTggMEgxNzZjLTI2LjUxIDAtNDggMjEuNDktNDggNDh2NDhINDhjLTI2LjUxIDAtNDggMjEuNDktNDggNDh2MzIwYzAgMjYuNTEgMjEuNDkgNDggNDggNDhoMjI0YzI2LjUxIDAgNDgtMjEuNDkgNDgtNDh2LTQ4aDgwYzI2LjUxIDAgNDgtMjEuNDkgNDgtNDhWOTkuODgyYTQ4IDQ4IDAgMCAwLTE0LjA1OS0zMy45NDF6TTI2NiA0NjRINTRhNiA2IDAgMCAxLTYtNlYxNTBhNiA2IDAgMCAxIDYtNmg3NHYyMjRjMCAyNi41MSAyMS40OSA0OCA0OCA0OGg5NnY0MmE2IDYgMCAwIDEtNiA2em0xMjgtOTZIMTgyYTYgNiAwIDAgMS02LTZWNTRhNiA2IDAgMCAxIDYtNmgxMDZ2ODhjMCAxMy4yNTUgMTAuNzQ1IDI0IDI0IDI0aDg4djIwMmE2IDYgMCAwIDEtNiA2em02LTI1NmgtNjRWNDhoOS42MzJjMS41OTEgMCAzLjExNy42MzIgNC4yNDMgMS43NTdsNDguMzY4IDQ4LjM2OGE2IDYgMCAwIDEgMS43NTcgNC4yNDNWMTEyeiI+PC9wYXRoPjwvc3ZnPg==');
+  background-size: 100% 100%;
+}
+
+.code-badge {
+  bottom: 0 !important;
+  top: unset !important;
+  background: unset !important;
+}
+
+.code-badge > .code-badge-check-icon {
+  background: green;
+}
+.code-badge-check-icon {
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 0 7px;
+  background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGFyaWEtaGlkZGVuPSJ0cnVlIiBmb2N1c2FibGU9ImZhbHNlIiBkYXRhLXByZWZpeD0iZmFzIiBkYXRhLWljb249ImNoZWNrIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtY2hlY2sgZmEtdy0xNiIgcm9sZT0iaW1nIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9IiYjMTA7ICAgIGNvbG9yOiAjMmFmZjMyOyYjMTA7Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik0xNzMuODk4IDQzOS40MDRsLTE2Ni40LTE2Ni40Yy05Ljk5Ny05Ljk5Ny05Ljk5Ny0yNi4yMDYgMC0zNi4yMDRsMzYuMjAzLTM2LjIwNGM5Ljk5Ny05Ljk5OCAyNi4yMDctOS45OTggMzYuMjA0IDBMMTkyIDMxMi42OSA0MzIuMDk1IDcyLjU5NmM5Ljk5Ny05Ljk5NyAyNi4yMDctOS45OTcgMzYuMjA0IDBsMzYuMjAzIDM2LjIwNGM5Ljk5NyA5Ljk5NyA5Ljk5NyAyNi4yMDYgMCAzNi4yMDRsLTI5NC40IDI5NC40MDFjLTkuOTk4IDkuOTk3LTI2LjIwNyA5Ljk5Ny0zNi4yMDQtLjAwMXoiLz48L3N2Zz4=');
+  background-size: 100% 100%;
+}
+</style><script type="text/javascript" src="./Watson_Gallery.md_files/c7fa7451-6f95-4815-ac32-b8cc2537837a" data-awssuidacr="Y7JaXyTJJC19z0ZfHccdSW3vmGb2mi2E"></script></head>
+  <body data-new-gr-c-s-check-loaded="14.1104.0" data-gr-ext-installed="">
+    <center>
+      <img src="./Watson_Gallery.md_files/SN_web_lightmode.png" width="300">
+    </center><br>
+    <h2>IBM Cloud Gallery</h2>
+    <p>Estimated Time (45 min)</p>
+    <p>IBM Cloud Gallery is a growing collection of data sets, notebooks, and project templates. In this lab, you will use <em>IBM cloud Gallery</em> to explore different datasets. As we have learnt in the course, the data is not only about numbers, it can be anything such as numeric data, text data, images, videos, audios etc. You will work on three samples.</p>
+    <p><strong>Sample 1</strong> in which you will learn about the dataset in which only numeric attributes are present.</p>
+    <p><strong>Sample 2</strong> in which you will learn about the dataset in which numeric &amp; text attributes are present.</p>
+    <p><strong>Sample 3</strong> in which you will analyze how the Jupyter Notebooks look like. How a Data Scientist create the models?</p>
+    <p>Let's take a look that how different datasets are used by Data Scientist.</p>
+    <h4>Objectives :</h4>
+    <p>You will learn to:</p>
+    <ul>
+      <li>Explore the IBM Cloud Gallery</li>
+      <li>Evaluate Numeric dataset</li>
+      <li>Evaluate dataset with Non-Numeric attributes</li>
+      <li>Evaluate Jupyter Notebook</li>
+    </ul>
+    <h4>Exercise 1: Evaluate Numeric dataset</h4>
+    <ol>
+      <li>
+        <p>Click on the link: <a href="https://dataplatform.cloud.ibm.com/gallery?utm_medium=Exinfluencer&amp;utm_source=Exinfluencer&amp;utm_content=000026UJ&amp;utm_term=10006555&amp;utm_id=NA-SkillsNetwork-Channel-SkillsNetworkCoursesIBMDeveloperSkillsNetworkDS0101ENSkillsNetwork947-2022-01-01" target="_blank" rel="external">https://dataplatform.cloud.ibm.com/gallery</a></p>
+      </li>
+      <li>
+        <p>Select <em>All Filters</em>. From <em>Format</em> select <em>Data</em> and from <em>Topic</em> select <em>Energy &amp; Utilities, Enviornment and Industry Accelerator</em></p>
+      </li>
+    </ol>
+    <img src="./Watson_Gallery.md_files/filter_1.png" style="border: solid 1px grey;margin-top: 30px; margin-left: 30px; margin-bottom: 30px">
+    <ol start="4">
+      <li>Click on <em>UCI: Forest Fires</em>.</li>
+    </ol>
+    <img src="./Watson_Gallery.md_files/UCI_Forest.png" style="border: solid 1px grey;margin-top: 30px; margin-left: 30px; margin-bottom: 30px">
+    <ol start="5">
+      <li>Preview the data using the <em>Preview</em> option.</li>
+    </ol>
+    <img src="./Watson_Gallery.md_files/data_UCI_Fires.png" style="border: solid 1px grey;margin-top: 30px; margin-left: 30px; margin-bottom: 30px">
+    <h5>Explore the data</h5>
+    <p>The data is related to forest fires where the aim is to predict the burned area of forest fires, in the northeast region of Portugal, by using meterological and other data.</p>
+    <p><strong>Attribute Information:</strong></p>
+    <ol>
+      <li>X - x-axis spatial coordinate within the Montesinho park map: 1 to 9</li>
+      <li>Y - y-axis spatial coordinate within the Montesinho park map: 2 to 9</li>
+      <li>month - month of the year: 'jan' to 'dec'</li>
+      <li>day - day of the week: 'mon' to 'sun'</li>
+      <li>FFMC - FFMC index from the FWI system: 18.7 to 96.20</li>
+      <li>DMC - DMC index from the FWI system: 1.1 to 291.3</li>
+      <li>DC - DC index from the FWI system: 7.9 to 860.6</li>
+      <li>ISI - ISI index from the FWI system: 0.0 to 56.10</li>
+      <li>temp - temperature in Celsius degrees: 2.2 to 33.30</li>
+      <li>RH - relative humidity in %: 15.0 to 100</li>
+      <li>wind - wind speed in km/h: 0.40 to 9.40</li>
+      <li>rain - outside rain in mm/m2 : 0.0 to 6.4</li>
+      <li>area - the burned area of the forest (in ha): 0.00 to 1090.84</li>
+    </ol>
+    <p>
+      (this output variable is very skewed towards 0.0, thus it may make
+      sense to model with the logarithm transform).
+    </p>
+    <h3>Exercise 2: Evaluate Non-Numeric dataset</h3>
+    <p>The data doesn't have to be only based on numbers. Data can be text, images and other types as well. Let's look into data having text values.</p>
+    <ol>
+      <li>Use the <em>All Filters</em>. From <em>Format</em> select <em>Data</em> and from <em>Topic</em> select <em>Economy and Business</em>.</li>
+    </ol>
+    <p>You will get mutiple datasets given. Scroll down and select <em>Airbnb Data for Analytics: Trentino Reviews</em> (If you will not get the data use the <strong>Load More</strong> option)</p>
+    <img src="./Watson_Gallery.md_files/AIrbnb.png" style="border: solid 1px grey;margin-top: 30px; margin-left: 30px; margin-bottom: 30px">
+    <ol start="2">
+      <li>Preview the data using the <em>Preview</em> option.</li>
+    </ol>
+    <img src="./Watson_Gallery.md_files/Airbnb_preview.png" style="border: solid 1px grey;margin-top: 30px; margin-left: 30px; margin-bottom: 30px">
+    <h5>Explore the data</h5>
+    <p>Airbnb, Inc. is an American company that operates an online marketplace for lodging, primarily homestays for vacation rentals, and tourism activities. Airbnb guests may leave a review after their stay, and these can be used as an indicator of airbnb activity.The minimum stay, price and number of reviews have been used to estimate the occupancy rate, the number of nights per year and the income per month for each listing.</p>
+    <p>This data can be used in various ways - To analyze the star ratings of places, to analyze the location preferences of the customers, to analyze the tone and sentiment of customer reviews and many more. Airbnb uses location data to improve guest satisfaction.</p>
+    <blockquote>
+      <p>💡 Can you think of what you can use this data for?</p>
+    </blockquote>
+    <p>The dataset comprises of three main tables:</p>
+    <ul>
+      <li>
+        <p>listings - Detailed listings data showing 96 attributes for each of the listings. Some of the attributes used in the analysis are price(continuous), longitude (continuous), latitude (continuous), listing_type (categorical), is_superhost (categorical), neighbourhood (categorical), ratings (continuous) among others.</p>
+      </li>
+      <li>
+        <p>reviews - Detailed reviews given by the guests with 6 attributes. Key attributes include date (datetime), listing_id (discrete), reviewer_id (discrete) and comment (textual).</p>
+      </li>
+      <li>
+        <p>calendar - Provides details about booking for the next year by listing. Four attributes in total including listing_id (discrete), date(datetime), available (categorical) and price (continuous).</p>
+      </li>
+    </ul>
+    <h3>Exercise 3: Evaluate Jupyter Notebook</h3>
+    <p>Use the <em>All Filters</em>. From <em>Format</em> select <em>Notebook</em> and select <em>Finding optimal locations of new stores using Decision Optimization</em> (If you will not find the notebook use the <strong>Load More</strong> option to load the notebooks)</p>
+    <img src="./Watson_Gallery.md_files/New_Store.png" style="border: solid 1px grey;margin-top: 30px; margin-left: 30px; margin-bottom: 30px">
+    <p>This notebook shows you how Decision Optimization can help to prescribe decisions for a complex constrained problem using Python to help determine the optimal location for a new store.</p>
+    <p>The objective is to minimize the total distance from libraries to coffee shops so that a book reader always gets to our coffee shop easily. It can be done by analyzing and displaying the location of the coffee shops on a map.</p>
+    <img src="./Watson_Gallery.md_files/Notebook.png" style="border: solid 1px grey;margin-top: 30px; margin-left: 30px; margin-bottom: 30px">
+    <p>When we validate the dataset, the locations on map are seperated.</p>
+    <img src="./Watson_Gallery.md_files/loc_jupyter.png" style="border: solid 1px grey;margin-top: 30px; margin-left: 30px; margin-bottom: 30px">
+    <p>But it is impossible to determine where to ideally open the coffee shops by just looking at the map.</p>
+    <p>This is solved by an optimization model that will help us determine where to locate the coffee shops in an optimal way.</p>
+    <img src="./Watson_Gallery.md_files/loc2_jupyter.png" style="border: solid 1px grey;margin-top: 30px; margin-left: 30px; margin-bottom: 30px">
+    <h4>Summary</h4>
+    <p>In this lab, you have learnt about to explore datasets and notebooks in IBM cloud Gallery.</p>
+    <h1>Author(s)</h1>
+    <h4><a href="https://www.linkedin.com/in/malika-goyal-04798622/?utm_medium=Exinfluencer&amp;utm_source=Exinfluencer&amp;utm_content=000026UJ&amp;utm_term=10006555&amp;utm_id=NA-SkillsNetwork-Channel-SkillsNetworkCoursesIBMDeveloperSkillsNetworkDS0101ENSkillsNetwork947-2022-01-01">Malika Singla</a></h4>
+    <h4></h4>
+    <h1>Other Contributor(s)</h1>
+    <h4><a href="https://www.linkedin.com/in/lavanya-sunderarajan-199a445/?utm_medium=Exinfluencer&amp;utm_source=Exinfluencer&amp;utm_content=000026UJ&amp;utm_term=10006555&amp;utm_id=NA-SkillsNetwork-Channel-SkillsNetworkCoursesIBMDeveloperSkillsNetworkDS0101ENSkillsNetwork947-2022-01-01">Lavanya</a></h4>
+    <h4></h4>
+    <h2>Change log</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Version</th>
+          <th>Changed by</th>
+          <th>Change Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2022-10-27</td>
+          <td>1.3</td>
+          <td>Lakshmi Holla</td>
+          <td>Updated Instructions</td>
+        </tr>
+        <tr>
+          <td>2022-07-22</td>
+          <td>1.2</td>
+          <td>Appalabhaktula Hema</td>
+          <td>Updated Screenshots and instructions</td>
+        </tr>
+        <tr>
+          <td>2022-02-16</td>
+          <td>1.1</td>
+          <td>Niveditha</td>
+          <td>Updated watson Screenshot</td>
+        </tr>
+        <tr>
+          <td>2021-06-010</td>
+          <td>1.0</td>
+          <td>Malika Singla</td>
+          <td>Initial Version</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2></h2>
+    <h3 align="center">© IBM Corporation 2021. All rights reserved.</h3>
+    <h3></h3>
+    <script>window.addEventListener('load', function() {
+snFaculty.inject();
+});</script>
+    <script src="./Watson_Gallery.md_files/inject.43989f87.js"></script>
+    <script src="./Watson_Gallery.md_files/highlight.min.js"></script>
+    <script src="./Watson_Gallery.md_files/highlightjs-badge.min.js"></script>
+  
+
+<style>
+@media print {
+   .code-badge { display: none; }
+}
+    .code-badge-pre {
+        position: relative;
+    }
+    .code-badge {
+        display: flex;
+        flex-direction: row;
+        white-space: normal;
+        background: transparent;
+        background: #333;
+        color: white;
+        font-size: 0.875em;
+        opacity: 0.5;
+        transition: opacity linear 0.5s;
+        border-radius: 0 0 0 7px;
+        padding: 5px 8px 5px 8px;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .code-badge.active {
+        opacity: 0.8;
+    }
+
+    .code-badge:hover {
+        opacity: .95;
+    }
+
+    .code-badge a,
+    .code-badge a:hover {
+        text-decoration: none;
+    }
+
+    .code-badge-language {
+        margin-right: 10px;
+        font-weight: 600;
+        color: goldenrod;
+    }
+    .code-badge-copy-icon {
+        font-size: 1.2em;
+        cursor: pointer;
+        padding: 0 7px;
+        margin-top:2;
+    }
+    .fa.text-success:{ color: limegreen !important }
+</style><div id="CodeBadgeTemplate" style="display:none">
+    <div class="code-badge">
+        <div class="code-badge-language">{{language}}</div>
+        <div title="Copy to clipboard">
+            <i class="{{copyIconClass}} code-badge-copy-icon"></i>
+        </div>
+     </div>
+</div><script>(() => {
+        window.addoncropExtensions = window.addoncropExtensions || [];
+        window.addoncropExtensions.push({
+            mode: 'emulator',
+            emulator: 'Foxified',
+            extension: {
+                id: 44,
+                name: 'YouTube Downloader by Addoncrop',
+                version: '17.2.8',
+                date: 'September 4, 2022',
+            },
+            flixmateConnected: false,
+        });
+    })();</script></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+  div.grammarly-desktop-integration {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+  }
+
+  div.grammarly-desktop-integration:before {
+    content: attr(data-content);
+  }
+</style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
